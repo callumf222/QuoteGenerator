@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:animated_background/animated_background.dart';
 
-
 void main() async {
-
-
 
   runApp (
     const MaterialApp(
@@ -25,8 +22,8 @@ class MyFlutterApp extends StatefulWidget {
 
 class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
-  late String quoteText;
-
+  late String quoteText = "Quote";
+  int selectedValue = 1;
 
   @override
   void initState()  {
@@ -96,7 +93,7 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
                     ),
 
                     Align(
-                      alignment: const Alignment(0.0, -0.7),
+                      alignment: const Alignment(0.0, -0.6),
                       child: Text(
                         quoteText,
                         textAlign: TextAlign.center,
@@ -109,9 +106,46 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                  
 
 
+                  Align(
+                      alignment: const Alignment(-0.8, -0.3),
+                      child: DropdownButton(
+                          dropdownColor: Colors.blue,
+
+                      value: selectedValue,
+                      items: const [
+                        DropdownMenuItem(
+                          value: 1,
+                          child: Text("Motivational"),
+                        ),
+                        DropdownMenuItem(
+                          value: 2,
+                          child: Text("Powerful"),
+                        ),
+                        DropdownMenuItem(
+                          value: 3,
+                          child: Text("Rich"),
+                        ),
+                        DropdownMenuItem(
+                          value: 4,
+                          child: Text("Sad"),
+                        ),
+                      ],
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 24,
+                              color: Color(0xfffee715),
+                          ),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedValue = value!;
+                        });
+                      })
+
+
+                  ),
                 ]),
     ),
     ),
