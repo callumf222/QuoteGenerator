@@ -14,13 +14,11 @@ class DecisionMap{
   late int ID;
 
   @HiveField(1)
-  late int yesID;
+  late String genre;
 
   @HiveField(2)
-  late int noID;
+  late String quote;
 
-  @HiveField(3)
-  late String description;
 }
 
 late Box<DecisionMap> box;
@@ -41,7 +39,7 @@ Future<void> main() async {
     String row = rows[i];
     List <String> itemInRow = row.split(",");
 
-    DecisionMap decMap = DecisionMap()
+    DecisionMap decMap = DecisionMap()  
       ..ID = int.parse(itemInRow[0])
       ..genre = itemInRow[1]
       ..quote = itemInRow[2];
