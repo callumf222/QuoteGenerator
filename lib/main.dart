@@ -4,6 +4,9 @@ import 'package:animated_background/animated_background.dart';
 import 'package:flutter/services.dart';
 
 import 'package:hive/hive.dart';
+import 'dart:math';
+
+
 import 'package:hive_flutter/adapters.dart';
 part 'main.g.dart';
 
@@ -11,14 +14,13 @@ part 'main.g.dart';
 class DecisionMap{
 
   @HiveField(0)
-  late int selectedId;
+  late int genre;
 
   @HiveField(1)
-  late String genre;
+  late int ID;
 
   @HiveField(2)
   late String quote;
-
 }
 
 late Box<DecisionMap> box;
@@ -40,10 +42,10 @@ Future<void> main() async {
     List <String> itemInRow = row.split(",");
 
     DecisionMap decMap = DecisionMap()
-      ..selectedId = int.parse(itemInRow[0])
-      ..genre = itemInRow[1]
+      ..genre = int.parse(itemInRow[0])
+      ..ID = int.parse(itemInRow[1])
       ..quote = itemInRow[2];
-    int key = int.parse(itemInRow[0]);
+    int key = int.parse(itemInRow[1]);
     box.put(key,decMap);
   }
 
@@ -66,8 +68,8 @@ class MyFlutterApp extends StatefulWidget {
 class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
   late String quoteText = "Please select the type of quote you would like and hit the button!";
-  late int selectedId = 1;
-  late String genre = "";
+  late int genre;
+  late int ID;
   late String quote = "";
 
   @override
@@ -78,8 +80,8 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
       setState(() {
         DecisionMap? current = box.get(1);
         if(current != null) {
-          selectedId = current.selectedId;
           genre = current.genre;
+          ID = current.ID;
           quote = current.quote;
         }
       });
@@ -89,26 +91,38 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
   void quoteGeneratorHandler() {
     setState(() {
 
-      if (selectedId == 1) {
-        DecisionMap? current = box.get(genre);
+      if (genre == 1) {
+        ID = 1 + Random().nextInt(4 - 1);
+        DecisionMap? current = box.get(ID);
         if(current != null) {
-          selectedId = current.selectedId;
-          genre = current.genre;
-          quote = current.quote;
+          quoteText = current.quote;
         }
       }
 
-      if (selectedId == 2) {
-        quoteText = "this worked second";
+      if (genre == 2) {
+        ID = 4 + Random().nextInt(7 - 4);
+        DecisionMap? current = box.get(ID);
+        if(current != null) {
+          quoteText = current.quote;
+        }
       }
 
-      if (selectedId == 3) {
-        quoteText = "this worked third";
+      if (genre == 3) {
+        ID = 7 + Random().nextInt(10 - 7);
+        DecisionMap? current = box.get(ID);
+        if(current != null) {
+          quoteText = current.quote;
+        }
       }
 
-      if (selectedId == 4) {
-        quoteText = "this worked forth";
+      if (genre == 4) {
+        ID = 10 + Random().nextInt(14 - 10);
+        DecisionMap? current = box.get(ID);
+        if(current != null) {
+          quoteText = current.quote;
+        }
       }
+
 
     });
   }
@@ -193,7 +207,7 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
               child: DropdownButton(
                   dropdownColor: Colors.blue,
 
-                  value: selectedId,
+                  value: genre,
                   items: const [
                     DropdownMenuItem(
                       value: 1,
@@ -221,7 +235,7 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
                   onChanged: (value) {
                     setState(() {
-                      selectedId = value!;
+                      genre = value!;
                     });
                   }),
           ),
