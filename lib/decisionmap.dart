@@ -1,6 +1,6 @@
 class DecisionMap{
 
-  late int ID;
+  late int selectedId;
   late String genre;
   late String quote;
 

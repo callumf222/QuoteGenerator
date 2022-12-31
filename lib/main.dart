@@ -11,7 +11,7 @@ part 'main.g.dart';
 class DecisionMap{
 
   @HiveField(0)
-  late int ID;
+  late int selectedId;
 
   @HiveField(1)
   late String genre;
@@ -39,8 +39,8 @@ Future<void> main() async {
     String row = rows[i];
     List <String> itemInRow = row.split(",");
 
-    DecisionMap decMap = DecisionMap()  
-      ..ID = int.parse(itemInRow[0])
+    DecisionMap decMap = DecisionMap()
+      ..selectedId = int.parse(itemInRow[0])
       ..genre = itemInRow[1]
       ..quote = itemInRow[2];
     int key = int.parse(itemInRow[0]);
@@ -66,39 +66,52 @@ class MyFlutterApp extends StatefulWidget {
 class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
   late String quoteText = "Please select the type of quote you would like and hit the button!";
-  int selectedValue = 1;
-
+  late int selectedId = 1;
+  late String genre = "";
+  late String quote = "";
 
   @override
   void initState()  {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-
+      setState(() {
+        DecisionMap? current = box.get(1);
+        if(current != null) {
+          selectedId = current.selectedId;
+          genre = current.genre;
+          quote = current.quote;
+        }
+      });
     });
   }
 
   void quoteGeneratorHandler() {
     setState(() {
-      if (selectedValue == 1) {
-        quoteText = "this worked first";
+
+      if (selectedId == 1) {
+        DecisionMap? current = box.get(genre);
+        if(current != null) {
+          selectedId = current.selectedId;
+          genre = current.genre;
+          quote = current.quote;
+        }
       }
 
-      if (selectedValue == 2) {
+      if (selectedId == 2) {
         quoteText = "this worked second";
       }
 
-      if (selectedValue == 3) {
+      if (selectedId == 3) {
         quoteText = "this worked third";
       }
 
-      if (selectedValue == 4) {
+      if (selectedId == 4) {
         quoteText = "this worked forth";
       }
 
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +193,7 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
               child: DropdownButton(
                   dropdownColor: Colors.blue,
 
-                  value: selectedValue,
+                  value: selectedId,
                   items: const [
                     DropdownMenuItem(
                       value: 1,
@@ -208,7 +221,7 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
                   onChanged: (value) {
                     setState(() {
-                      selectedValue = value!;
+                      selectedId = value!;
                     });
                   }),
           ),

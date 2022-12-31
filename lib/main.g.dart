@@ -17,7 +17,7 @@ class DecisionMapAdapter extends TypeAdapter<DecisionMap> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return DecisionMap()
-      ..ID = fields[0] as int
+      ..selectedId = fields[0] as int
       ..genre = fields[1] as String
       ..quote = fields[2] as String;
   }
@@ -27,7 +27,7 @@ class DecisionMapAdapter extends TypeAdapter<DecisionMap> {
     writer
       ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.ID)
+      ..write(obj.selectedId)
       ..writeByte(1)
       ..write(obj.genre)
       ..writeByte(2)
