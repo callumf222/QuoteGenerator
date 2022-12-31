@@ -23,7 +23,8 @@ class MyFlutterApp extends StatefulWidget {
 class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
   late String quoteText = "Quote";
-  int selectedValue = selectedValue;
+  int selectedValue = 1;
+
 
   @override
   void initState()  {
@@ -35,13 +36,16 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
   }
 
   void quoteGeneratorHandler() {
-    if (selectedValue == 1) {
-      quoteText = "this worked";
-    }
+    setState(() {
+      if (selectedValue == 1) {
+        quoteText = "this worked";
+      }
 
       if (selectedValue == 2) {
         quoteText = "this worked twice";
       }
+
+    });
   }
 
 
@@ -120,46 +124,44 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
                     ),
                   ),
 
+          Align(
+              alignment: const Alignment(-0.8, -0.3),
+              child: DropdownButton(
+                  dropdownColor: Colors.blue,
 
-                  Align(
-                      alignment: const Alignment(-0.8, -0.3),
-                      child: DropdownButton(
-                          dropdownColor: Colors.blue,
-
-                          value: selectedValue,
-                          items: const [
-                            DropdownMenuItem(
-                              value: 1,
-                              child: Text("Motivational"),
-                            ),
-                            DropdownMenuItem(
-                              value: 2,
-                              child: Text("Powerful"),
-                            ),
-                            DropdownMenuItem(
-                              value: 3,
-                              child: Text("Rich"),
-                            ),
-                            DropdownMenuItem(
-                              value: 4,
-                              child: Text("Sad"),
-                            ),
-                          ],
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 24,
-                            color: Color(0xfffee715),
-                          ),
-
-                          onChanged: (value) {
-                            setState(() {
-                              selectedValue = value;
-                            });
-                          })
-
-
+                  value: selectedValue,
+                  items: const [
+                    DropdownMenuItem(
+                      value: 1,
+                      child: Text("Motivational"),
+                    ),
+                    DropdownMenuItem(
+                      value: 2,
+                      child: Text("Powerful"),
+                    ),
+                    DropdownMenuItem(
+                      value: 3,
+                      child: Text("Rich"),
+                    ),
+                    DropdownMenuItem(
+                      value: 4,
+                      child: Text("Sad"),
+                    ),
+                  ],
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 24,
+                    color: Color(0xfffee715),
                   ),
+
+                  onChanged: (value) {
+                    setState(() {
+                      selectedValue = value!;
+                    });
+                  }),
+          ),
+
                 ]),
           ),
         ),
