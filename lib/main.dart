@@ -23,7 +23,7 @@ class MyFlutterApp extends StatefulWidget {
 class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
   late String quoteText = "Quote";
-  int selectedValue = 1;
+  int selectedValue = selectedValue;
 
   @override
   void initState()  {
@@ -33,6 +33,17 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
     });
   }
+
+  void quoteGeneratorHandler() {
+    if (selectedValue == 1) {
+      quoteText = "this worked";
+    }
+
+      if (selectedValue == 2) {
+        quoteText = "this worked twice";
+      }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,45 +78,47 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
                 alignment: Alignment.topLeft,
                 children: [
 
-                 Align(
-                      alignment: const Alignment(0.0, 0.4),
-                      child: MaterialButton(
-                        onPressed: () {},
-                        color: const Color(0xfffee715),
-                        elevation: 0,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                        ),
-                        textColor: const Color(0xff000000),
-                        height: 40,
-                        minWidth: 140,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        child: const Text(
-                          "Press to generate quote",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                          ),
-                        ),
+                  Align(
+                    alignment: const Alignment(0.0, 0.4),
+                    child: MaterialButton(
+                      onPressed: () {
+                        quoteGeneratorHandler();
+                      },
+                      color: const Color(0xfffee715),
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
                       ),
-                    ),
-
-                    Align(
-                      alignment: const Alignment(0.0, -0.6),
-                      child: Text(
-                        quoteText,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.clip,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
+                      textColor: const Color(0xff000000),
+                      height: 40,
+                      minWidth: 140,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
+                      child: const Text(
+                        "Press to generate quote",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
                           fontStyle: FontStyle.normal,
-                          fontSize: 34,
-                          color: Color(0xfffee715),
                         ),
                       ),
                     ),
+                  ),
+
+                  Align(
+                    alignment: const Alignment(0.0, -0.6),
+                    child: Text(
+                      quoteText,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 34,
+                        color: Color(0xfffee715),
+                      ),
+                    ),
+                  ),
 
 
                   Align(
@@ -113,46 +126,45 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
                       child: DropdownButton(
                           dropdownColor: Colors.blue,
 
-                      value: selectedValue,
-                      items: const [
-                        DropdownMenuItem(
-                          value: 1,
-                          child: Text("Motivational"),
-                        ),
-                        DropdownMenuItem(
-                          value: 2,
-                          child: Text("Powerful"),
-                        ),
-                        DropdownMenuItem(
-                          value: 3,
-                          child: Text("Rich"),
-                        ),
-                        DropdownMenuItem(
-                          value: 4,
-                          child: Text("Sad"),
-                        ),
-                      ],
+                          value: selectedValue,
+                          items: const [
+                            DropdownMenuItem(
+                              value: 1,
+                              child: Text("Motivational"),
+                            ),
+                            DropdownMenuItem(
+                              value: 2,
+                              child: Text("Powerful"),
+                            ),
+                            DropdownMenuItem(
+                              value: 3,
+                              child: Text("Rich"),
+                            ),
+                            DropdownMenuItem(
+                              value: 4,
+                              child: Text("Sad"),
+                            ),
+                          ],
                           style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 24,
-                              color: Color(0xfffee715),
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 24,
+                            color: Color(0xfffee715),
                           ),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedValue = value!;
-                        });
-                      })
+
+                          onChanged: (value) {
+                            setState(() {
+                              selectedValue = value;
+                            });
+                          })
 
 
                   ),
                 ]),
-    ),
-    ),
+          ),
+        ),
       ),
-          );
-
-
+    );
+  }
 
   }
-}
