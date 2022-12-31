@@ -1,8 +1,53 @@
 import 'package:flutter/material.dart';
 
 import 'package:animated_background/animated_background.dart';
+import 'package:flutter/services.dart';
 
-void main() async {
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+part 'main.g.dart';
+
+@HiveType(typeId: 0)
+class DecisionMap{
+
+  @HiveField(0)
+  late int ID;
+
+  @HiveField(1)
+  late int yesID;
+
+  @HiveField(2)
+  late int noID;
+
+  @HiveField(3)
+  late String description;
+}
+
+late Box<DecisionMap> box;
+
+Future<void> main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();   //HIVE SETUP
+  Hive.registerAdapter(DecisionMapAdapter());
+  box = await Hive.openBox<DecisionMap>('decisionMap');
+
+  String csv = "decision_map.csv"; //path to csv file asset
+  String fileData = await rootBundle.loadString(csv);
+  List <String> rows = fileData.split("\n");
+
+  for (int i = 0; i < rows.length; i++)  {
+    //selects an item from row and places
+    String row = rows[i];
+    List <String> itemInRow = row.split(",");
+
+    DecisionMap decMap = DecisionMap()
+      ..ID = int.parse(itemInRow[0])
+      ..genre = itemInRow[1]
+      ..quote = itemInRow[2];
+    int key = int.parse(itemInRow[0]);
+    box.put(key,decMap);
+  }
 
   runApp (
     const MaterialApp(
@@ -22,7 +67,7 @@ class MyFlutterApp extends StatefulWidget {
 
 class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
-  late String quoteText = "Quote";
+  late String quoteText = "Please select the type of quote you would like and hit the button!";
   int selectedValue = 1;
 
 
@@ -38,11 +83,19 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
   void quoteGeneratorHandler() {
     setState(() {
       if (selectedValue == 1) {
-        quoteText = "this worked";
+        quoteText = "this worked first";
       }
 
       if (selectedValue == 2) {
-        quoteText = "this worked twice";
+        quoteText = "this worked second";
+      }
+
+      if (selectedValue == 3) {
+        quoteText = "this worked third";
+      }
+
+      if (selectedValue == 4) {
+        quoteText = "this worked forth";
       }
 
     });
