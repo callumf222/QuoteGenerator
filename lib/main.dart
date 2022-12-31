@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:animated_background/animated_background.dart';
@@ -10,7 +9,7 @@ void main() async {
 
   runApp (
     const MaterialApp(
-      home: const MyFlutterApp(),
+      home: MyFlutterApp(),
     ),
   );
 }
@@ -26,9 +25,7 @@ class MyFlutterApp extends StatefulWidget {
 
 class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
-  late int ID;
-
-
+  late String quoteText;
 
 
   @override
@@ -97,11 +94,31 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
+
+                    Align(
+                      alignment: const Alignment(0.0, -0.7),
+                      child: Text(
+                        quoteText,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.clip,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 34,
+                          color: Color(0xfffee715),
+                        ),
+                      ),
+                    ),
+                  
+
+
                 ]),
-          ),
-        ),
+    ),
+    ),
       ),
-    );
+          );
+
+
 
   }
 }
