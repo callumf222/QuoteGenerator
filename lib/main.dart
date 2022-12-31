@@ -39,7 +39,7 @@ Future<void> main() async {
   for (int i = 0; i < rows.length; i++)  {
     //selects an item from row and places
     String row = rows[i];
-    List <String> itemInRow = row.split(",");
+    List <String> itemInRow = row.split("\");
 
     DecisionMap decMap = DecisionMap()
       ..genre = int.parse(itemInRow[0])
