@@ -68,7 +68,7 @@ class MyFlutterApp extends StatefulWidget {
 class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
   late String quoteText = "Please select the type of quote you would like and hit the button!";
-  late int genre;
+  late int genre = 1;
   late int ID;
   late String quote = "";
 
@@ -78,12 +78,8 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
-        DecisionMap? current = box.get(1);
-        if(current != null) {
-          genre = current.genre;
-          ID = current.ID;
-          quote = current.quote;
-        }
+
+
       });
     });
   }
