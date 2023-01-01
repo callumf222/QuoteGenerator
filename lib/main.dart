@@ -84,11 +84,16 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
     });
   }
 
+  int randomNumberMinMax(int min, int max){
+    int randomminmax = min + Random().nextInt(max - min);
+    return randomminmax;
+  }
+
   void quoteGeneratorHandler() {
     setState(() {
 
       if (genre == 1) {
-        ID = 1 + Random().nextInt(4 - 1);
+        ID = randomNumberMinMax(1, 21);
         DecisionMap? current = box.get(ID);
         if(current != null) {
           quoteText = current.quote;
@@ -96,7 +101,7 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
       }
 
       if (genre == 2) {
-        ID = 4 + Random().nextInt(7 - 4);
+        ID = randomNumberMinMax(21, 41);
         DecisionMap? current = box.get(ID);
         if(current != null) {
           quoteText = current.quote;
@@ -104,7 +109,7 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
       }
 
       if (genre == 3) {
-        ID = 7 + Random().nextInt(10 - 7);
+        ID = randomNumberMinMax(41, 61);
         DecisionMap? current = box.get(ID);
         if(current != null) {
           quoteText = current.quote;
@@ -112,7 +117,7 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
       }
 
       if (genre == 4) {
-        ID = 10 + Random().nextInt(14 - 10);
+        ID = randomNumberMinMax(61, 81);
         DecisionMap? current = box.get(ID);
         if(current != null) {
           quoteText = current.quote;
