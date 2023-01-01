@@ -188,7 +188,9 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
                     ),
                   ),
 
-                  Align(
+            Padding(
+              padding: const EdgeInsets.all(50),
+                  child: Align(
                     alignment: const Alignment(0.0, -0.6),
                     child: Text(
                       quoteText,
@@ -202,6 +204,7 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
+            ),
 
           Align(
               alignment: const Alignment(-0.8, 0.0),
