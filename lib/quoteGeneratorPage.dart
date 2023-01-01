@@ -204,7 +204,7 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
                   ),
 
           Align(
-              alignment: const Alignment(-0.8, -0.3),
+              alignment: const Alignment(-0.8, 0.0),
               child: DropdownButton(
                   dropdownColor: Colors.blue,
 
