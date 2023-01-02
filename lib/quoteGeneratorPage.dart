@@ -127,24 +127,26 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
 
     });
   }
-
   @override
   Widget build(BuildContext context) {
+
+    double width = MediaQuery.of(context).size.width;
+    double fullWidth = width * 1; //50 % width of screen
+
+    double height = MediaQuery.of(context).size.height;
+    double fullHeight = height * 1;
+
     return Scaffold(
-      backgroundColor: const Color(0xff101820),
-      body: AnimatedBackground(
-        behaviour: RandomParticleBehaviour(
-          options: const ParticleOptions(
-            spawnMaxRadius: 50,
-            spawnMinSpeed: 10.00,
-            particleCount: 30,
-            spawnMaxSpeed: 40,
-            minOpacity: 0.3,
-            spawnOpacity: 0.4,
-            baseColor: Colors.blue,
+
+        body: Container(
+          height: fullHeight * 1,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage("https://images.unsplash.com/photo-1557682268-e3955ed5d83f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y29sb3VyZWQlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"),
+                fit: BoxFit.cover),
           ),
-        ),
-        vsync: this,
+
 
         child: Align(
           alignment: Alignment.center,
