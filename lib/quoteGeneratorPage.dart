@@ -169,7 +169,7 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
                       onPressed: () {
                         quoteGeneratorHandler();
                       },
-                      color: const Color(0xfffee715),
+                      color: const Color(0xff4CC9F0),
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.zero,
@@ -190,60 +190,71 @@ class MyFlutterState extends State<MyFlutterApp> with TickerProviderStateMixin {
                     ),
                   ),
 
-            Padding(
-              padding: const EdgeInsets.all(50),
-                  child: Align(
-                    alignment: const Alignment(0.0, -0.6),
-                    child: Text(
-                      quoteText,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.clip,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 34,
-                        color: Color(0xfffee715),
-                      ),
-                    ),
+                  Align(
+                    alignment: const Alignment(0.0, -0.7),
+                  child: Container(
+                    height: 175.0,
+                    width: 800.0,
+                    color: Colors.transparent,
+                    child: Container(
+                        decoration: const BoxDecoration(
+                            color: Color(0xff4CC9F0),
+                            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                        child: Center(
+                          child: Text(quoteText,
+                            style: const TextStyle(color: Colors.black, fontSize: 34),
+                            textAlign: TextAlign.center,),
+                        )),
                   ),
-            ),
+                  ),
 
           Align(
               alignment: const Alignment(-0.8, 0.0),
-              child: DropdownButton(
-                  dropdownColor: Colors.blue,
+            child: Container(
+              height: 175.0,
+              width: 300.0,
+              color: Colors.transparent,
+              child: Container(
+                  decoration: const BoxDecoration(
+                      color: Color(0xff4CC9F0),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                  child: Center(
+                    child: DropdownButton(
+                        dropdownColor: Colors.blue,
+                        value: genre,
+                        items: const [
+                          DropdownMenuItem(
+                            value: 1,
+                            child: Text("Motivational"),
+                          ),
+                          DropdownMenuItem(
+                            value: 2,
+                            child: Text("Powerful"),
+                          ),
+                          DropdownMenuItem(
+                            value: 3,
+                            child: Text("Love"),
+                          ),
+                          DropdownMenuItem(
+                            value: 4,
+                            child: Text("Sad"),
+                          ),
+                        ],
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 38,
+                          color: Color(0xff000000),
+                        ),
 
-                  value: genre,
-                  items: const [
-                    DropdownMenuItem(
-                      value: 1,
-                      child: Text("Motivational"),
-                    ),
-                    DropdownMenuItem(
-                      value: 2,
-                      child: Text("Powerful"),
-                    ),
-                    DropdownMenuItem(
-                      value: 3,
-                      child: Text("Love"),
-                    ),
-                    DropdownMenuItem(
-                      value: 4,
-                      child: Text("Sad"),
-                    ),
-                  ],
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 24,
-                    color: Color(0xfffee715),
-                  ),
+                        onChanged: (value) {
+                          setState(() {
+                            genre = value!;
+                          });
+                        }),
+                  )),
+            ),
 
-                  onChanged: (value) {
-                    setState(() {
-                      genre = value!;
-                    });
-                  }),
           ),
 
                 ]),
